@@ -1,0 +1,51 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">CRUD</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    @Html.ActionLink("Home","Index","Home")
+                </li>
+                <li>
+                    @Html.ActionLink("Create Contact", "Create", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("List", "Read", "Home")
+                </li>
+                
+             </ul>
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+ 
+        
+
+
+        <br />
+        <br />
+        <br />
+        <footer>
+            <h4>
+                All &copy; rights reserved with Metisc.
+            </h4>
+        </footer>
+</div>
+
+  
+
+   
+   
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+
+    
+</body>
+</html>

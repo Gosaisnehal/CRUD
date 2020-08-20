@@ -1,0 +1,106 @@
+﻿@model IEnumerable<tbl_Contacts>
+@{
+    ViewBag.Title = "Read";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of the contacts.</h2>
+<br />
+<br />
+
+<p>
+    @Html.ActionLink("Create New Contact", "Create")
+</p>
+<br />
+<br />
+@*displaying data in table format*@
+
+
+<table class="table table-bordered table-striped table-condensed table-hover table-responsive">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.e_mail )
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phoneNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unitNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.streetNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.streetName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.suburb)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_Countries.countryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.company)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.e_mail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phoneNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unitNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.streetNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.streetName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.suburb)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.state)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_Countries.countryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.company)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { ContactNo = item.contactID }) |
+            @Html.ActionLink("Details", "Details", new { ContactNo = item.contactID }) |
+            @Html.ActionLink("Delete", "Delete", new { ContactNo = item.contactID })
+        </td>
+    </tr>
+}
+</table>
