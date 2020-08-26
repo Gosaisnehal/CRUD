@@ -1,9 +1,19 @@
-﻿@model tbl_Contacts
-
+﻿@*@model IEnumerable<tbl_Contacts>*@
+@model tbl_Contacts
+@*@model tbl_ContactsValidation*@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+<br /> 
+<br />
+@if (TempData["Msg"] != null)
+    {
+    <h4>@TempData["Msg"].ToString()</h4>
+    }
+
 
 <h2>Enter your contact details here.</h2>
 <br />
@@ -20,7 +30,8 @@
         <div class= "col-md-4">
 
             @Html.TextBoxFor(model => model.firstName, new { @class = "form-control", @placeholder = "Enter your First Name" })
-
+            @Html.ValidationMessageFor(model => model.firstName, "", new { @class =" text-danger"})
+            
         </div>
     </div>
 
@@ -32,6 +43,7 @@
         <div class="col-md-4">
 
             @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", @placeholder = "Enter your Last Name" })
+            @Html.ValidationMessageFor(model => model.lastName, "", new { @class = " text-danger" })
 
         </div>
     </div>
@@ -43,6 +55,7 @@
         <div class="col-md-4">
 
             @Html.TextBoxFor(model => model.e_mail, new { @class = "form-control", @placeholder = "Enter your E-mail" })
+            @Html.ValidationMessageFor(model => model.e_mail, "", new { @class = " text-danger" })
 
         </div>
     </div>
@@ -54,6 +67,7 @@
         <div class="col-md-4">
 
             @Html.TextBoxFor(model => model.phoneNo, new { @class = "form-control", @placeholder = "Enter your Phone number" })
+            @Html.ValidationMessageFor(model => model.phoneNo, "", new { @class = " text-danger" })
 
         </div>
     </div>
@@ -137,7 +151,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Create" value="model.contactID" class="btn btn-primary" />
         </div>
     </div>
     @*</div>*@
@@ -151,9 +165,9 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 }*@
-
-
-
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/jquery.validate.min.js"></script>
+<script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
 
 
 @*Created using bootstrap forms *@

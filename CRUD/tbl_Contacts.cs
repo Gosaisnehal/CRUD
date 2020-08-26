@@ -12,43 +12,48 @@ namespace CRUD
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class tbl_Contacts
     {
 
         public int contactID { get; set; }
 
-        [DisplayName("First Name")]
+        //[Required(ErrorMessage = "First Name is required")]
+        //[DisplayName("First Name")]
         public string firstName { get; set; }
 
-        [DisplayName("Last Name")]
+
+        //[Required(ErrorMessage = "Last Name is required")]
+        //[DisplayName("Last Name")]
         public string lastName { get; set; }
 
-        [DisplayName("E-mail")]
+        //[Required(ErrorMessage = "E-mail is required")]
+        //[DisplayName("E-mail")]
         public string e_mail { get; set; }
 
-        [DisplayName("Phone No")]
+        //[DisplayName("Phone No")]
         public string phoneNo { get; set; }
 
-        [DisplayName("Unit No")]
+        //[DisplayName("Unit No")]
         public Nullable<int> unitNo { get; set; }
 
-        [DisplayName("Street Name")]
+        //[DisplayName("Street Name")]
         public string streetName { get; set; }
 
-        [DisplayName("Suburb")]
+        //[DisplayName("Suburb")]
         public string suburb { get; set; }
 
-        [DisplayName("State")]
+        //[DisplayName("State")]
         public string state { get; set; }
 
-        [DisplayName("Company Name")]
+        //[DisplayName("Company Name")]
         public string company { get; set; }
 
-        [DisplayName("Street No")]
+        //[DisplayName("Street No")]
         public Nullable<int> streetNo { get; set; }
 
-        [DisplayName("Country")]
+        //[DisplayName("Country")]
         public Nullable<int> countryId { get; set; }
     
         public virtual tbl_Countries tbl_Countries { get; set; }

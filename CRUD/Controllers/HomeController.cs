@@ -27,15 +27,35 @@ namespace CRUD.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(tbl_Contacts contact)
+        public ActionResult Create(/*int ContactNo,*/ tbl_Contacts model)
         {
-            CrudAppDbContext db = new CrudAppDbContext();
-            db.tbl_Contacts.Add(contact);
-            db.SaveChanges();
-            /*To update the database and redirect to Create*/
-            return RedirectToAction("Create");
-        }
 
+            try
+            {
+                if (ModelState.IsValid)
+
+                {
+
+                    CrudAppDbContext db = new CrudAppDbContext();
+                    db.tbl_Contacts.Add(model);
+                    db.SaveChanges();
+                    /*To update the database and redirect to Create*/
+                    TempData["Msg"] = "Contact created successfully.";
+                    return RedirectToAction("Create");/*, new { ContactNo = model.contactID });*/
+                }
+                else
+                {
+                    TempData["Msg"] = "Please add some details first.";
+                    return RedirectToAction("Create");
+                   
+                }
+            }
+            catch (Exception e)
+            {
+                TempData["Msg"] = "Contact was not created. " + e.Message;
+                return RedirectToAction("Create");
+            }
+        }  
         [HttpGet]
         public ActionResult Read()
         {
@@ -66,41 +86,49 @@ namespace CRUD.Controllers
         public ActionResult Edit(int ContactNo, tbl_Contacts model)
 
         {
-            using (var db = new CrudAppDbContext())
+            try
             {
-                // accessing pertcular record for matching ID,choosen from  
-                var data = db.tbl_Contacts.Where(x => x.contactID == ContactNo).SingleOrDefault();
-
-                if (data != null)
+                using (var db = new CrudAppDbContext())
                 {
-                    data.firstName = model.firstName;
-                    data.lastName = model.lastName;
-                    data.e_mail = model.e_mail;
-                    data.phoneNo = model.phoneNo;
-                    data.unitNo = model.unitNo;
-                    data.streetNo = model.streetNo;
-                    data.streetName = model.streetName;
-                    data.suburb = model.suburb;
-                    data.state = model.state;
-                    data.countryId = model.countryId;
-                    //data.tbl_Countries.countryName = model.tbl_Countries.countryName;
-                    data.company = model.company;
-                    db.SaveChanges();
+                    // accessing pertcular record for matching ID,choosen from  
+                    var data = db.tbl_Contacts.Where(x => x.contactID == ContactNo).SingleOrDefault();
 
-                    return RedirectToAction("Read");
+                    if (data != null)
+                    {
+                        data.firstName = model.firstName;
+                        data.lastName = model.lastName;
+                        data.e_mail = model.e_mail;
+                        data.phoneNo = model.phoneNo;
+                        data.unitNo = model.unitNo;
+                        data.streetNo = model.streetNo;
+                        data.streetName = model.streetName;
+                        data.suburb = model.suburb;
+                        data.state = model.state;
+                        data.countryId = model.countryId;
+                        //data.tbl_Countries.countryName = model.tbl_Countries.countryName;
+                        data.company = model.company;
+                        db.SaveChanges();
+                        return RedirectToAction("Read");
+                    }
+
+                    else
+                    {
+                        return View();
+                    }
+                    var countryList = db.tbl_Countries.ToList();
+                    ViewBag.CountryList = new SelectList(countryList, "countryId", "countryName");
+
+                    return View(data);
                 }
-
-                else
-                {
-                    return View();
-                }
-                var countryList = db.tbl_Countries.ToList();
-                ViewBag.CountryList = new SelectList(countryList, "countryId", "countryName");
-
-                return View(data);
+                TempData["Msg"] = "Contact was updated successfully.";
+                return RedirectToAction("Read");
             }
-
-        }
+            catch(Exception e )
+            {
+                TempData["Msg"] = "Contact was not updated.";
+                return RedirectToAction("Edit", new { ContactNo = model.contactID});
+            }
+            }
     
          public ActionResult Details(int ContactNo)
         {
